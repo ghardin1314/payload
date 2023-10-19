@@ -20,5 +20,46 @@ export const PostsCollection: CollectionConfig = {
         update: () => false,
       },
     },
+    {
+      name: 'postType',
+      label: 'Post Type',
+      type: 'radio',
+      defaultValue: 'internal',
+      options: [
+        {
+          label: 'Internal',
+          value: 'internal',
+        },
+        {
+          label: 'External',
+          value: 'external',
+        },
+      ],
+    },
+    {
+      label: 'External Post Props',
+      type: 'group',
+      name: 'externalProps',
+      admin: {
+        condition: (data) => data.postType === 'external',
+      },
+      fields: [],
+    },
+    {
+      label: 'Internal Post Props',
+      type: 'group',
+      name: 'internalProps',
+      admin: {
+        condition: (data) => data.postType === 'internal',
+      },
+      fields: [
+        {
+          name: 'slug',
+          type: 'text',
+          unique: true,
+          required: true,
+        },
+      ],
+    },
   ],
 }
